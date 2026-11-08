@@ -1,0 +1,117 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-cream font-sans text-[17px] leading-[1.55] text-ink antialiased;
+  }
+
+  :focus-visible {
+    outline: 3px solid theme("colors.saffron");
+    outline-offset: 3px;
+  }
+
+  ::placeholder {
+    color: #5a628a;
+  }
+}
+
+@layer components {
+  /* Кнопки-наклейки: приподнимаются при наведении, «вдавливаются» при нажатии */
+  .press {
+    transition:
+      transform 0.15s ease,
+      box-shadow 0.15s ease;
+  }
+  .press:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 #0e1b4d;
+  }
+  .press:active {
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0 #0e1b4d;
+  }
+
+  .lift {
+    transition: transform 0.25s ease;
+  }
+  .lift:hover {
+    transform: translateY(-6px) rotate(-0.6deg);
+  }
+
+  .chip-dark {
+    @apply self-start rounded-full bg-ink px-3 py-[5px] text-[13px] font-bold uppercase tracking-[0.06em] text-cream;
+  }
+
+  .h-section {
+    @apply m-0 text-[clamp(40px,5vw,72px)] font-black leading-[0.95] tracking-[-0.04em];
+  }
+
+  .container-yq {
+    @apply mx-auto w-full max-w-[1280px] px-5 sm:px-8 lg:px-14;
+  }
+}
+
+@keyframes yq-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee {
+  animation: yq-marquee 28s linear infinite;
+}
+
+@keyframes yq-steam {
+  0% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  40% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-22px);
+  }
+}
+.steam path {
+  animation: yq-steam 2.4s ease-in-out infinite;
+}
+.steam path:nth-child(2) {
+  animation-delay: 0.6s;
+}
+.steam path:nth-child(3) {
+  animation-delay: 1.2s;
+}
+
+@keyframes yq-bob {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-3deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(-1deg);
+  }
+}
+.bob {
+  animation: yq-bob 5s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .marquee,
+  .steam path,
+  .bob {
+    animation: none;
+  }
+}
